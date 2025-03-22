@@ -2,12 +2,16 @@ import 'package:flutter/cupertino.dart';
 
 class ProviderList extends ChangeNotifier {
   final List _notes = [];
+  List _notesFiltered = [];
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controllerEditing = TextEditingController();
+  final TextEditingController _controllerSearch = TextEditingController();
   final GlobalKey<AnimatedListState> _animatedList =
       GlobalKey<AnimatedListState>();
   List get notes => _notes;
+  List get notesFiltered => _notesFiltered;
   TextEditingController get controller => _controller;
+  TextEditingController get controllersearch => _controllerSearch;
   TextEditingController get controllerediting => _controllerEditing;
   GlobalKey get animatedList => _animatedList;
 
@@ -26,6 +30,26 @@ class ProviderList extends ChangeNotifier {
     if (_notes.isNotEmpty) {
       _notes.removeAt(index);
       _notes.insert(index, text);
+      notifyListeners();
+    }
+  }
+
+  void filterNotes(String query) {
+    if (query.isEmpty) {
+      _notesFiltered = [];
+      notifyListeners();
+    } else {
+      _notesFiltered =
+          _notes.where((note) {
+            return note.toLowerCase().contains(query.toLowerCase().trim());
+          }).toList();
+      notifyListeners();
+    }
+  }
+
+  void FilterNotesAdd(value) {
+    if (notes.isNotEmpty) {
+      _notesFiltered.add(value);
       notifyListeners();
     }
   }

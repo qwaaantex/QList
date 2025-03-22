@@ -20,6 +20,7 @@ class QlisthomeState extends State<Qlisthome> {
   Widget build(BuildContext context) {
     ProviderList _provider = Provider.of<ProviderList>(context);
     List _notes = _provider.notes;
+    String _notesSearch = _provider.controllersearch.text;
     return MaterialApp(
       theme: QListTheme(),
       home: Scaffold(
@@ -108,84 +109,123 @@ class QlisthomeState extends State<Qlisthome> {
         body: Align(
           alignment: Alignment.center,
           child:
-              _notes.isEmpty
-                  ? Text(
-                    "У вас нету активных заметок",
-                    style: TextStyle(color: Colors.grey, fontSize: 16),
-                  )
-                  : AnimatedList(
-                    key: _provider.animatedList,
-                    initialItemCount: _notes.length,
-                    itemBuilder: (context, index, animation) {
-                      return SizeTransition(
-                        sizeFactor: animation,
-                        child: GestureDetector(
-                          onLongPress: () {
-                            showModalBottomSheet(
-                              barrierColor: Colors.black.withOpacity(0.4),
-                              backgroundColor: QListTheme().canvasColor,
-                              context: context,
-                              builder:
-                                  (context) => SizedBox(
+              _notesSearch.isEmpty
+                  ? _notes.isEmpty
+                      ? Text(
+                        "У вас нету активных заметок",
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      )
+                      : AnimatedList(
+                        key: _provider.animatedList,
+                        initialItemCount: _notes.length,
+                        itemBuilder: (context, index, animation) {
+                          return SizeTransition(
+                            sizeFactor: animation,
+                            child: GestureDetector(
+                              onLongPress: () {
+                                showModalBottomSheet(
+                                  barrierColor: Colors.black.withOpacity(0.4),
+                                  backgroundColor: QListTheme().canvasColor,
+                                  context: context,
+                                  builder:
+                                      (context) => SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                            0.2,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(height: 16),
+                                            Container(
+                                              height:
+                                                  MediaQuery.of(
+                                                    context,
+                                                  ).copyWith().size.height *
+                                                  0.006,
+                                              width:
+                                                  MediaQuery.of(
+                                                    context,
+                                                  ).copyWith().size.height *
+                                                  0.04,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(48),
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            SizedBox(height: 16),
+                                            InfoNotes(index: index),
+                                          ],
+                                        ),
+                                      ),
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 10),
+                                  Container(
                                     height:
                                         MediaQuery.of(context).size.height *
-                                        0.2,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: 16),
-                                        Container(
-                                          height:
-                                              MediaQuery.of(
-                                                context,
-                                              ).copyWith().size.height *
-                                              0.006,
-                                          width:
-                                              MediaQuery.of(
-                                                context,
-                                              ).copyWith().size.height *
-                                              0.04,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                              48,
-                                            ),
-                                            color: Colors.grey,
+                                        0.08,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(24),
+                                      color: QListTheme().canvasColor,
+                                    ),
+                                    child: SizedBox(
+                                      child: Center(
+                                        child: Text(
+                                          _provider.notes[index],
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
                                           ),
+                                          textAlign: TextAlign.center,
                                         ),
-                                        SizedBox(height: 16),
-                                        InfoNotes(index: index),
-                                      ],
-                                    ),
-                                  ),
-                            );
-                          },
-                          child: Column(
-                            children: [
-                              SizedBox(height: 10),
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.08,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(24),
-                                  color: QListTheme().canvasColor,
-                                ),
-                                child: SizedBox(
-                                  child: Center(
-                                    child: Text(
-                                      _provider.notes[index],
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
                                       ),
-                                      textAlign: TextAlign.center,
                                     ),
                                   ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                  : _provider.notesFiltered.isEmpty
+                  ? Center(
+                    child: Text(
+                      "Таких заметок нету.",
+                      style: TextStyle(color: Colors.grey, fontSize: 16),
+                    ),
+                  )
+                  : ListView.builder(
+                    itemCount: _provider.notesFiltered.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.08,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(24),
+                              color: QListTheme().canvasColor,
+                            ),
+                            child: SizedBox(
+                              child: Center(
+                                child: Text(
+                                  _provider.notesFiltered[index],
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       );
                     },
                   ),

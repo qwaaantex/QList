@@ -5,6 +5,7 @@ ThemeData QListTheme() {
     primaryColor: Colors.grey,
     splashColor: Colors.white,
     canvasColor: Colors.grey.shade900,
+    textSelectionTheme: TextSelectionThemeData(selectionColor: Colors.grey),
     textTheme: TextTheme(
       titleSmall: TextStyle(color: Colors.grey, fontSize: 16),
       titleMedium: TextStyle(color: Colors.white, fontSize: 20),

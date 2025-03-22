@@ -27,6 +27,7 @@ class InputState extends State<Input> {
           child: TextField(
             controller: _provider.controller,
             autofocus: true,
+            enableInteractiveSelection: false,
             textAlign: TextAlign.start,
             cursorColor: Colors.white,
             style: TextStyle(color: Colors.white),

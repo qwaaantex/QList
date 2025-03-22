@@ -31,6 +31,7 @@ class EditNotesState extends State<EditNotes> {
             autofocus: true,
             textAlign: TextAlign.start,
             cursorColor: Colors.white,
+            enableInteractiveSelection: false,
             style: TextStyle(color: Colors.white),
             onSubmitted: (value) {
               Navigator.pop(context);
