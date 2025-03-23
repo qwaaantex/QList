@@ -64,7 +64,7 @@ class QlisthomeState extends State<Qlisthome> {
                             ),
                             SizedBox(height: 32),
                             Center(child: Input()),
-                            SizedBox(height: 16),
+                            SizedBox(height: 32),
                           ],
                         ),
                       ),
@@ -118,135 +118,139 @@ class QlisthomeState extends State<Qlisthome> {
         ),
         backgroundColor: Colors.black,
         body: Align(
-          alignment: Alignment.center,
-          child:
-              _notesSearch.isEmpty
-                  ? _notes.isEmpty
-                      ? Text(
-                        "У вас нету активных заметок",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
-                      )
-                      : AnimatedList(
-                        key: _provider.animatedList,
-                        initialItemCount: _notes.length,
-                        itemBuilder: (context, index, animation) {
-                          return SizeTransition(
-                            sizeFactor: animation,
-                            child: GestureDetector(
-                              onLongPress: () {
-                                showModalBottomSheet(
-                                  barrierColor: Colors.black.withOpacity(0.4),
-                                  backgroundColor: QListTheme().canvasColor,
-                                  context: context,
-                                  builder:
-                                      (context) => SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            SizedBox(height: 16),
-                                            Container(
-                                              height:
-                                                  MediaQuery.of(
-                                                    context,
-                                                  ).copyWith().size.height *
-                                                  0.006,
-                                              width:
-                                                  MediaQuery.of(
-                                                    context,
-                                                  ).copyWith().size.height *
-                                                  0.04,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(48),
-                                                color: Colors.grey,
+          child: AnimatedSwitcher(
+            duration: Duration(milliseconds: 200),
+            child:
+                _notesSearch.isEmpty
+                    ? _notes.isEmpty
+                        ? Text(
+                          "Активных заметок нет",
+                          style: TextStyle(color: Colors.grey, fontSize: 16),
+                        )
+                        : AnimatedList(
+                          key: _provider.animatedList,
+                          initialItemCount: _notes.length,
+                          itemBuilder: (context, index, animation) {
+                            return SizeTransition(
+                              sizeFactor: animation,
+                              child: GestureDetector(
+                                onLongPress: () {
+                                  showModalBottomSheet(
+                                    barrierColor: Colors.black.withOpacity(0.4),
+                                    backgroundColor: QListTheme().canvasColor,
+                                    context: context,
+                                    builder:
+                                        (context) => SizedBox(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              SizedBox(height: 16),
+                                              Container(
+                                                height:
+                                                    MediaQuery.of(
+                                                      context,
+                                                    ).copyWith().size.height *
+                                                    0.006,
+                                                width:
+                                                    MediaQuery.of(
+                                                      context,
+                                                    ).copyWith().size.height *
+                                                    0.04,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(48),
+                                                  color: Colors.grey,
+                                                ),
                                               ),
-                                            ),
-                                            SizedBox(height: 16),
-                                            InfoNotes(index: index),
-                                            SizedBox(height: 32),
-                                          ],
+                                              SizedBox(height: 16),
+                                              InfoNotes(index: index),
+                                              SizedBox(height: 32),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 10),
-                                  Center(
-                                    child: Container(
-                                      padding: EdgeInsets.all(16),
-                                      width:
-                                          MediaQuery.of(context).size.width *
-                                          0.9,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(24),
-                                        color: QListTheme().canvasColor,
-                                      ),
-                                      child: SizedBox(
-                                        child: Center(
-                                          child: Text(
-                                            _provider.notes[index],
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 10),
+                                    Center(
+                                      child: Container(
+                                        padding: EdgeInsets.all(16),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                            0.9,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            24,
+                                          ),
+                                          color: QListTheme().canvasColor,
+                                        ),
+                                        child: SizedBox(
+                                          child: Center(
+                                            child: Text(
+                                              _provider.notes[index],
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                              ),
+                                              textAlign: TextAlign.center,
                                             ),
-                                            textAlign: TextAlign.center,
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      )
-                  : _provider.notesFiltered.isEmpty
-                  ? Center(
-                    child: Text(
-                      "Таких заметок нету.",
-                      style: TextStyle(color: Colors.grey, fontSize: 16),
-                    ),
-                  )
-                  : AnimatedList(
-                    initialItemCount: _provider.notesFiltered.length,
-                    itemBuilder: (context, index, animation) {
-                      return FadeTransition(
-                        opacity: animation,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 10),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24),
-                                color: QListTheme().canvasColor,
-                              ),
-                              child: Center(
-                                child: Container(
-                                  padding: EdgeInsets.all(16),
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      _provider.notesFiltered[index],
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
+                            );
+                          },
+                        )
+                    : _provider.notesFiltered.isEmpty
+                    ? Center(
+                      child: Text(
+                        "Совпадений не найдено",
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                    )
+                    : AnimatedList(
+                      initialItemCount: _provider.notesFiltered.length,
+                      itemBuilder: (context, index, animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 10),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(24),
+                                  color: QListTheme().canvasColor,
+                                ),
+                                child: Center(
+                                  child: Container(
+                                    padding: EdgeInsets.all(16),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        _provider.notesFiltered[index],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                        textAlign: TextAlign.center,
                                       ),
-                                      textAlign: TextAlign.center,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+          ),
         ),
       ),
     );

@@ -49,7 +49,12 @@ class EditNotesState extends State<EditNotes> {
                 borderSide: const BorderSide(width: 2, color: Colors.grey),
                 borderRadius: BorderRadius.circular(24),
               ),
-              prefixIcon: Icon(Icons.notes_rounded),
+              prefixIcon: IconButton(
+                onPressed: () {
+                  _provider.controllerediting.clear();
+                },
+                icon: Icon(Icons.clear, size: 22),
+              ),
               suffixIcon: IconButton(
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
@@ -60,6 +65,7 @@ class EditNotesState extends State<EditNotes> {
                     widget.index,
                     context,
                   );
+                  _provider.controllerediting.clear();
                 },
                 icon: Icon(Icons.add_circle, size: 22),
               ),

@@ -17,6 +17,7 @@ class _TittleState extends State<Tittle> {
 
     return SizedBox(
       child: TextField(
+        autofocus: false,
         controller: _provider.controllersearch,
         cursorColor: Colors.grey,
         textAlign: TextAlign.center,

@@ -66,7 +66,7 @@ class InfoNotesState extends State<InfoNotes> {
                             ),
                             SizedBox(height: 16),
                             EditNotes(index: widget.index),
-                            SizedBox(height: 16),
+                            SizedBox(height: 32),
                           ],
                         ),
                       ),
