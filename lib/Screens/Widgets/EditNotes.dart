@@ -16,7 +16,6 @@ class EditNotesState extends State<EditNotes> {
   Widget build(BuildContext context) {
     ProviderList _provider = Provider.of<ProviderList>(context);
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
@@ -24,14 +23,15 @@ class EditNotesState extends State<EditNotes> {
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
         SizedBox(height: 10),
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextField(
             controller: _provider.controllerediting,
             autofocus: true,
             textAlign: TextAlign.start,
             cursorColor: Colors.white,
-            style: TextStyle(color: Colors.white),
+            maxLines: null,
+            style: TextStyle(color: Colors.white, decorationThickness: 0),
             onSubmitted: (value) {
               Navigator.pop(context);
               _provider.editNotes(value, widget.index, context);
@@ -40,6 +40,7 @@ class EditNotesState extends State<EditNotes> {
               isDense: true,
               floatingLabelBehavior: FloatingLabelBehavior.always,
               hintText: "Введите заметку...",
+
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(width: 2, color: Colors.grey),
                 borderRadius: BorderRadius.circular(24),

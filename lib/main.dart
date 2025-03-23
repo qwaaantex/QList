@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qlist/Providers/Provider.dart';
 import 'package:qlist/Screens/QListHome.dart';
+import 'package:qlist/Theme/Theme.dart';
 
 void main() {
   runApp(MainList());
@@ -19,7 +20,7 @@ class MainListState extends State<MainList> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ProviderList(),
-      child: MaterialApp(home: Qlisthome()),
+      child: MaterialApp(theme: QListTheme(), home: Qlisthome()),
     );
   }
 }

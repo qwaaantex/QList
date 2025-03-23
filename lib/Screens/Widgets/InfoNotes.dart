@@ -33,32 +33,42 @@ class InfoNotesState extends State<InfoNotes> {
             onPressed: () {
               Navigator.pop(context);
               showModalBottomSheet(
+                isScrollControlled: true,
                 barrierColor: Colors.black.withOpacity(0.4),
                 backgroundColor: QListTheme().canvasColor,
                 context: context,
                 builder:
-                    (context) => SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(height: 16),
-                          Container(
-                            height:
-                                MediaQuery.of(context).copyWith().size.height *
-                                0.006,
-                            width:
-                                MediaQuery.of(context).copyWith().size.height *
-                                0.04,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(48),
-                              color: Colors.grey,
+                    (context) => Padding(
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
+                      ),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(height: 16),
+                            Container(
+                              height:
+                                  MediaQuery.of(
+                                    context,
+                                  ).copyWith().size.height *
+                                  0.006,
+                              width:
+                                  MediaQuery.of(
+                                    context,
+                                  ).copyWith().size.height *
+                                  0.04,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(48),
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 16),
-                          EditNotes(index: widget.index),
-                          SizedBox(height: 32),
-                        ],
+                            SizedBox(height: 16),
+                            EditNotes(index: widget.index),
+                            SizedBox(height: 16),
+                          ],
+                        ),
                       ),
                     ),
               );

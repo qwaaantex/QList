@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProviderList extends ChangeNotifier {
-  final List _notes = [];
+  List _notes = [];
   List _notesFiltered = [];
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controllerEditing = TextEditingController();
@@ -15,9 +16,21 @@ class ProviderList extends ChangeNotifier {
   TextEditingController get controllerediting => _controllerEditing;
   GlobalKey get animatedList => _animatedList;
 
-  void addNotes(text) {
+  ProviderList() {
+    loadNotes();
+  }
+
+  void loadNotes() async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
+    _notes = storage.getStringList("notes") ?? [];
+    notifyListeners();
+  }
+
+  void addNotes(text) async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
     if (text.isNotEmpty) {
       _notes.add(text);
+      await storage.setString("_notes", text);
       _animatedList.currentState?.insertItem(
         _notes.length - 1,
         duration: Duration(milliseconds: 400),

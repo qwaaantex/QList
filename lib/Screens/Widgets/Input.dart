@@ -22,14 +22,16 @@ class InputState extends State<Input> {
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
         SizedBox(height: 10),
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextField(
             controller: _provider.controller,
-            autofocus: true,
+            maxLines: null,
             textAlign: TextAlign.start,
             cursorColor: Colors.white,
-            style: TextStyle(color: Colors.white),
+
+            autofocus: true,
+            style: TextStyle(color: Colors.white, decorationThickness: 0),
             onSubmitted: (value) {
               Navigator.pop(context);
               _provider.addNotes(value);
@@ -38,7 +40,6 @@ class InputState extends State<Input> {
             decoration: InputDecoration(
               isDense: true,
               hintText: "Введите заметку...",
-
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 2, color: Colors.grey),
                 borderRadius: BorderRadius.circular(24),
@@ -47,13 +48,19 @@ class InputState extends State<Input> {
                 borderSide: BorderSide(width: 2, color: Colors.grey),
                 borderRadius: BorderRadius.circular(24),
               ),
-              prefixIcon: Icon(Icons.notes_rounded),
+              prefixIcon: IconButton(
+                onPressed: () {
+                  _provider.clearAllNotes();
+                },
+                icon: Icon(Icons.clear, size: 22),
+              ),
               suffixIcon: IconButton(
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {
                   Navigator.pop(context);
                   _provider.addNotes(_provider.controller.text);
+
                   _provider.clearAllNotes();
                 },
                 icon: Icon(Icons.add_circle, size: 22),

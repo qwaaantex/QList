@@ -33,6 +33,21 @@ class SubmittedClear extends StatelessWidget {
             child: Text("Удалить", style: QListTheme().textTheme.titleSmall),
           ),
         ),
+        SizedBox(height: 10),
+        Container(
+          width: size.width * 0.9,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(width: 2, color: Colors.grey),
+          ),
+          child: TextButton(
+            style: QListTheme().textButtonTheme.style,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Отмена", style: QListTheme().textTheme.titleSmall),
+          ),
+        ),
       ],
     );
   }
