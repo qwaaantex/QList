@@ -21,11 +21,11 @@ class _TittleState extends State<Tittle> {
       textAlign: TextAlign.center,
       enableInteractiveSelection: false,
       onSubmitted: (value) {
-        _provider.FilterNotesAdd(value);
+        _provider.filterNotesAdd(value);
         _provider.filterNotes(_provider.controllersearch.text);
       },
       onChanged: (value) {
-        _provider.FilterNotesAdd(value);
+        _provider.filterNotesAdd(value);
         _provider.filterNotes(_provider.controllersearch.text);
       },
       decoration: InputDecoration(

@@ -47,7 +47,7 @@ class ProviderList extends ChangeNotifier {
     }
   }
 
-  void FilterNotesAdd(value) {
+  void filterNotesAdd(value) {
     if (notes.isNotEmpty) {
       _notesFiltered.add(value);
       notifyListeners();
@@ -64,8 +64,12 @@ class ProviderList extends ChangeNotifier {
   }
 
   void remoteNotes(index) {
-    _notes.isEmpty ? null : _notes.removeAt(index);
-
-    notifyListeners();
+    if (_notes.isNotEmpty) {
+      _notes.removeAt(index);
+      _animatedList.currentState?.removeItem(index, (context, animation) {
+        return FadeTransition(opacity: animation);
+      }, duration: Duration(milliseconds: 500));
+      notifyListeners();
+    }
   }
 }
