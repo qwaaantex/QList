@@ -36,9 +36,9 @@ class QlisthomeState extends State<Qlisthome> {
                 context: context,
                 builder:
                     (context) => SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(height: 16),
                           Container(
@@ -55,6 +55,7 @@ class QlisthomeState extends State<Qlisthome> {
                           ),
                           SizedBox(height: 16),
                           Center(child: Input()),
+                          SizedBox(height: 32),
                         ],
                       ),
                     ),
@@ -71,9 +72,9 @@ class QlisthomeState extends State<Qlisthome> {
                   context: context,
                   builder:
                       (context) => SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.2,
                         width: MediaQuery.of(context).size.width,
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             SizedBox(height: 16),
                             Container(
@@ -94,6 +95,7 @@ class QlisthomeState extends State<Qlisthome> {
                             ),
                             SizedBox(height: 16),
                             SubmittedClear(),
+                            SizedBox(height: 32),
                           ],
                         ),
                       ),
@@ -127,11 +129,9 @@ class QlisthomeState extends State<Qlisthome> {
                               context: context,
                               builder:
                                   (context) => SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height *
-                                        0.2,
                                     width: MediaQuery.of(context).size.width,
                                     child: Column(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SizedBox(height: 16),
                                         Container(
@@ -154,6 +154,7 @@ class QlisthomeState extends State<Qlisthome> {
                                         ),
                                         SizedBox(height: 16),
                                         InfoNotes(index: index),
+                                        SizedBox(height: 32),
                                       ],
                                     ),
                                   ),

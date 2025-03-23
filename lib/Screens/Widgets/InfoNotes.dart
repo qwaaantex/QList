@@ -38,9 +38,9 @@ class InfoNotesState extends State<InfoNotes> {
                 context: context,
                 builder:
                     (context) => SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(height: 16),
                           Container(
@@ -55,8 +55,9 @@ class InfoNotesState extends State<InfoNotes> {
                               color: Colors.grey,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 16),
                           EditNotes(index: widget.index),
+                          SizedBox(height: 32),
                         ],
                       ),
                     ),
