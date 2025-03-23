@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:qlist/Providers/Provider.dart';
+import 'package:qlist/Screens/Widgets/Clear.dart';
+import 'package:qlist/Screens/Widgets/CreateNotes.dart';
 import 'package:qlist/Screens/Widgets/InfoNotes.dart';
-import 'package:qlist/Screens/Widgets/Input.dart';
-import 'package:qlist/Screens/Widgets/SubmittedClear.dart';
+import 'package:qlist/Screens/Widgets/OpenEdits.dart';
 import 'package:qlist/Screens/Widgets/Tittle.dart';
 import 'package:qlist/Theme/Theme.dart';
 
@@ -28,92 +31,8 @@ class QlisthomeState extends State<Qlisthome> {
         appBar: AppBar(
           title: Tittle(),
 
-          leading: IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                isScrollControlled: true,
-                barrierColor: Colors.black.withOpacity(0.4),
-                backgroundColor: QListTheme().canvasColor,
-                context: context,
-                builder:
-                    (context) => Padding(
-                      padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom,
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 16),
-                            Container(
-                              height:
-                                  MediaQuery.of(
-                                    context,
-                                  ).copyWith().size.height *
-                                  0.006,
-                              width:
-                                  MediaQuery.of(
-                                    context,
-                                  ).copyWith().size.height *
-                                  0.04,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(48),
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(height: 32),
-                            Center(child: Input()),
-                            SizedBox(height: 32),
-                          ],
-                        ),
-                      ),
-                    ),
-              );
-            },
-            icon: Icon(Icons.add, color: Colors.white, size: 30),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  barrierColor: Colors.black.withOpacity(0.4),
-                  backgroundColor: QListTheme().canvasColor,
-                  context: context,
-                  builder:
-                      (context) => SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 16),
-                            Container(
-                              height:
-                                  MediaQuery.of(
-                                    context,
-                                  ).copyWith().size.height *
-                                  0.006,
-                              width:
-                                  MediaQuery.of(
-                                    context,
-                                  ).copyWith().size.height *
-                                  0.04,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(48),
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            SubmittedClear(),
-                            SizedBox(height: 32),
-                          ],
-                        ),
-                      ),
-                );
-              },
-              icon: Icon(CupertinoIcons.delete, color: Colors.white),
-            ),
-          ],
+          leading: CreateNotes(),
+          actions: [Clear()],
           backgroundColor: Colors.black,
         ),
         backgroundColor: Colors.black,
@@ -127,86 +46,7 @@ class QlisthomeState extends State<Qlisthome> {
                           "Активных заметок нет",
                           style: TextStyle(color: Colors.grey, fontSize: 16),
                         )
-                        : AnimatedList(
-                          key: _provider.animatedList,
-                          initialItemCount: _notes.length,
-                          itemBuilder: (context, index, animation) {
-                            return SizeTransition(
-                              sizeFactor: animation,
-                              child: GestureDetector(
-                                onLongPress: () {
-                                  showModalBottomSheet(
-                                    barrierColor: Colors.black.withOpacity(0.4),
-                                    backgroundColor: QListTheme().canvasColor,
-                                    context: context,
-                                    builder:
-                                        (context) => SizedBox(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              SizedBox(height: 16),
-                                              Container(
-                                                height:
-                                                    MediaQuery.of(
-                                                      context,
-                                                    ).copyWith().size.height *
-                                                    0.006,
-                                                width:
-                                                    MediaQuery.of(
-                                                      context,
-                                                    ).copyWith().size.height *
-                                                    0.04,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(48),
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                              SizedBox(height: 16),
-                                              InfoNotes(index: index),
-                                              SizedBox(height: 32),
-                                            ],
-                                          ),
-                                        ),
-                                  );
-                                },
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 10),
-                                    Center(
-                                      child: Container(
-                                        padding: EdgeInsets.all(16),
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                            0.9,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            24,
-                                          ),
-                                          color: QListTheme().canvasColor,
-                                        ),
-                                        child: SizedBox(
-                                          child: Center(
-                                            child: Text(
-                                              _provider.notes[index],
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        )
+                        : OpenEdits()
                     : _provider.notesFiltered.isEmpty
                     ? Center(
                       child: Text(
@@ -233,13 +73,24 @@ class QlisthomeState extends State<Qlisthome> {
                                     padding: EdgeInsets.all(16),
                                     child: Align(
                                       alignment: Alignment.center,
-                                      child: Text(
-                                        _provider.notesFiltered[index],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                        textAlign: TextAlign.center,
+                                      child: Row(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            child: IconButton(
+                                              onPressed: null,
+                                              icon: Icon(Icons.star),
+                                            ),
+                                          ),
+                                          Text(
+                                            _provider.notesFiltered[index],
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),

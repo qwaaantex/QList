@@ -9,19 +9,19 @@ environment:
   sdk: ^3.7.0
 
 dependencies:
-
   cupertino_icons: ^1.0.8
-  provider: ^6.1.2
-  shared_preferences: ^2.5.2
   flutter:
     sdk: flutter
+  hugeicons: ^0.0.10
+  ionicons: ^0.2.2
+  provider: ^6.1.2
+  rive_animated_icon: ^2.0.3
+  shared_preferences: ^2.5.2
 
 dev_dependencies:
-
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
- 
 
 flutter:
 
