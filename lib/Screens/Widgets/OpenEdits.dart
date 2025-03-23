@@ -1,6 +1,6 @@
+import 'package:animated_icon/animated_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:qlist/Providers/Provider.dart';
 import 'package:qlist/Screens/Widgets/InfoNotes.dart';
@@ -114,16 +114,32 @@ class _OpenEditsState extends State<OpenEdits> {
                           ),
                           leading: GestureDetector(
                             onTap: () {
-                              _provider.addStar(index);
+                              _provider.replaceStar(index);
                             },
                             child: AnimatedSwitcher(
-                              duration: Duration(seconds: 10),
-                              child: Icon(
-                                Ionicons.star,
-                                color:
-                                    _provider.isStarred ? null : Colors.yellow,
-                                size: 25,
-                              ),
+                              duration: Duration(seconds: 1),
+                              child:
+                                  _provider.isStars[index] == "true"
+                                      ? AnimateIcon(
+                                        onTap: () {
+                                          _provider.replaceStar(index);
+                                        },
+                                        iconType: IconType.animatedOnTap,
+                                        height: 30,
+                                        width: 30,
+                                        color: Colors.yellow,
+                                        animateIcon: AnimateIcons.heart,
+                                      )
+                                      : AnimateIcon(
+                                        onTap: () {
+                                          _provider.replaceStar(index);
+                                        },
+                                        iconType: IconType.animatedOnTap,
+                                        height: 30,
+                                        width: 30,
+                                        color: Color(0xFF3F3E47),
+                                        animateIcon: AnimateIcons.heart,
+                                      ),
                             ),
                           ),
 

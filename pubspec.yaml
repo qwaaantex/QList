@@ -15,6 +15,7 @@ dependencies:
   hugeicons: ^0.0.10
   ionicons: ^0.2.2
   provider: ^6.1.2
+  animated_icon: ^0.0.9
   rive_animated_icon: ^2.0.3
   shared_preferences: ^2.5.2
 

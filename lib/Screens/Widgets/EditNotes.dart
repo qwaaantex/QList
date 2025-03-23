@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qlist/Providers/Provider.dart';
+import 'package:rive_animated_icon/rive_animated_icon.dart';
 
 class EditNotes extends StatefulWidget {
   final int index;
@@ -67,7 +68,13 @@ class EditNotesState extends State<EditNotes> {
                   );
                   _provider.controllerediting.clear();
                 },
-                icon: Icon(Icons.add_circle, size: 22),
+                icon: RiveAnimatedIcon(
+                  riveIcon: RiveIcon.add,
+                  loopAnimation: true,
+                  width: 32,
+                  height: 32,
+                  color: Color(0xFF3F3E47),
+                ),
               ),
             ),
           ),

@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:qlist/Providers/Provider.dart';
 import 'package:qlist/Screens/Widgets/Clear.dart';
 import 'package:qlist/Screens/Widgets/CreateNotes.dart';
-import 'package:qlist/Screens/Widgets/InfoNotes.dart';
 import 'package:qlist/Screens/Widgets/OpenEdits.dart';
 import 'package:qlist/Screens/Widgets/Tittle.dart';
 import 'package:qlist/Theme/Theme.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qlist/Providers/Provider.dart';
+import 'package:rive_animated_icon/rive_animated_icon.dart';
 
 class Tittle extends StatefulWidget {
   const Tittle({super.key});
@@ -50,7 +51,13 @@ class _TittleState extends State<Tittle> {
             widthFactor: 1.0,
             heightFactor: 1.0,
             alignment: Alignment.center,
-            child: Icon(Icons.search, size: 20),
+            child: RiveAnimatedIcon(
+              riveIcon: RiveIcon.search,
+              loopAnimation: true,
+              width: 30,
+              height: 30,
+              color: Color(0xFF3F3E47),
+            ),
           ),
 
           hintText: "Поиск...",

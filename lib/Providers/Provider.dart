@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ProviderList extends ChangeNotifier {
   List<String> _notes = [];
   List<String> _notesFiltered = [];
-  bool _isStarred = false;
+  Map<int, String> _isStars = {};
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controllerEditing = TextEditingController();
   final TextEditingController _controllerSearch = TextEditingController();
@@ -16,7 +16,7 @@ class ProviderList extends ChangeNotifier {
   TextEditingController get controllersearch => _controllerSearch;
   TextEditingController get controllerediting => _controllerEditing;
   GlobalKey get animatedList => _animatedList;
-  bool get isStarred => _isStarred;
+  Map<int, String> get isStars => _isStars;
 
   ProviderList() {
     _notes = [];
@@ -28,6 +28,14 @@ class ProviderList extends ChangeNotifier {
     try {
       final SharedPreferences storage = await SharedPreferences.getInstance();
       List<String>? savedNotes = storage.getStringList("_notes");
+      _notes = savedNotes ?? [];
+
+      for (int i = 0; i < _notes.length; i++) {
+        String? savedStars = storage.getString("star$i");
+        if (savedStars != null) {
+          isStars[i] = savedStars;
+        }
+      }
 
       _notes = savedNotes ?? [];
       notifyListeners();
@@ -49,8 +57,13 @@ class ProviderList extends ChangeNotifier {
     }
   }
 
-  void addStar(index) {
-    _isStarred = !isStarred;
+  void replaceStar(index) async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
+    if (!isStars.containsKey(index)) {
+      isStars[index] = "false";
+    }
+    isStars[index] = (isStars[index] == "true" ? "false" : "true");
+    storage.setString("star$index", isStars[index]!);
     notifyListeners();
   }
 
@@ -92,6 +105,7 @@ class ProviderList extends ChangeNotifier {
     final SharedPreferences storage = await SharedPreferences.getInstance();
     _notes.clear();
     await storage.setStringList("_notes", _notes);
+
     notifyListeners();
   }
 
@@ -100,6 +114,8 @@ class ProviderList extends ChangeNotifier {
     if (_notes.isNotEmpty) {
       _notes.removeAt(index);
       await storage.setStringList("_notes", _notes);
+      isStars[index] = "false";
+      storage.setString("star$index", isStars[index]!);
       _animatedList.currentState?.removeItem(index, (context, animation) {
         return FadeTransition(opacity: animation);
       }, duration: Duration(milliseconds: 500));
