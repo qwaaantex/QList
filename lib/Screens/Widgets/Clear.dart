@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:qlist/Screens/Widgets/SubmittedClear.dart';
 import 'package:qlist/Theme/Theme.dart';
 
@@ -44,7 +44,7 @@ class _ClearState extends State<Clear> {
               ),
         );
       },
-      icon: Icon(CupertinoIcons.delete, color: Colors.white),
+      icon: HugeIcon(icon: HugeIcons.strokeRoundedClean, color: Colors.white),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:qlist/Screens/Widgets/Input.dart';
 import 'package:qlist/Theme/Theme.dart';
 
@@ -51,7 +52,7 @@ class _CreateNotesState extends State<CreateNotes> {
               ),
         );
       },
-      icon: Icon(Icons.add, color: Colors.white, size: 30),
+      icon: Icon(HugeIcons.strokeRoundedAdd01, color: Colors.white, size: 28),
     );
   }
 }

@@ -110,7 +110,10 @@ class _OpenEditsState extends State<OpenEdits> {
                                     ),
                               );
                             },
-                            child: Icon(HugeIcons.strokeRoundedBook01),
+                            child: Icon(
+                              HugeIcons.strokeRoundedBook01,
+                              size: 26,
+                            ),
                           ),
                           leading: GestureDetector(
                             onTap: () {

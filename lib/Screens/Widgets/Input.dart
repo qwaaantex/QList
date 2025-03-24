@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 import 'package:qlist/Providers/Provider.dart';
-import 'package:rive_animated_icon/rive_animated_icon.dart';
 
 class Input extends StatefulWidget {
   const Input({super.key});
@@ -30,7 +30,7 @@ class InputState extends State<Input> {
             maxLines: null,
             textAlign: TextAlign.start,
             cursorColor: Colors.white,
-
+            maxLength: 200,
             autofocus: true,
             style: TextStyle(color: Colors.white, decorationThickness: 0),
             onSubmitted: (value) {
@@ -53,7 +53,7 @@ class InputState extends State<Input> {
                 onPressed: () {
                   _provider.clearAllNotes();
                 },
-                icon: Icon(Icons.clear, size: 22),
+                icon: Icon(HugeIcons.strokeRoundedClean, size: 24),
               ),
               suffixIcon: IconButton(
                 padding: EdgeInsets.zero,
@@ -64,13 +64,7 @@ class InputState extends State<Input> {
 
                   _provider.clearAllNotes();
                 },
-                icon: RiveAnimatedIcon(
-                  riveIcon: RiveIcon.add,
-                  loopAnimation: true,
-                  width: 32,
-                  height: 32,
-                  color: Color(0xFF3F3E47),
-                ),
+                icon: Icon(HugeIcons.strokeRoundedAddCircleHalfDot, size: 24),
               ),
             ),
           ),

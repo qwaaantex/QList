@@ -44,7 +44,7 @@ class _TittleState extends State<Tittle> {
                 _provider.controllersearch.clear();
                 _provider.filterNotes(_provider.controllersearch.text);
               },
-              icon: Icon(Icons.clear, size: 20),
+              icon: Icon(Icons.clear, size: 22),
             ),
           ),
           prefixIcon: Align(

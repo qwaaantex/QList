@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 import 'package:qlist/Providers/Provider.dart';
-import 'package:rive_animated_icon/rive_animated_icon.dart';
 
 class EditNotes extends StatefulWidget {
   final int index;
@@ -31,6 +31,7 @@ class EditNotesState extends State<EditNotes> {
             autofocus: true,
             textAlign: TextAlign.start,
             cursorColor: Colors.white,
+            maxLength: 200,
             maxLines: null,
             style: TextStyle(color: Colors.white, decorationThickness: 0),
             onSubmitted: (value) {
@@ -54,7 +55,7 @@ class EditNotesState extends State<EditNotes> {
                 onPressed: () {
                   _provider.controllerediting.clear();
                 },
-                icon: Icon(Icons.clear, size: 22),
+                icon: Icon(HugeIcons.strokeRoundedClean, size: 24),
               ),
               suffixIcon: IconButton(
                 padding: EdgeInsets.zero,
@@ -68,13 +69,7 @@ class EditNotesState extends State<EditNotes> {
                   );
                   _provider.controllerediting.clear();
                 },
-                icon: RiveAnimatedIcon(
-                  riveIcon: RiveIcon.add,
-                  loopAnimation: true,
-                  width: 32,
-                  height: 32,
-                  color: Color(0xFF3F3E47),
-                ),
+                icon: Icon(HugeIcons.strokeRoundedAddCircleHalfDot, size: 24),
               ),
             ),
           ),
