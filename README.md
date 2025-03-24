@@ -29,10 +29,10 @@
 
 ## 🖼️ Visual Showcase
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/998ff273-a3a6-47b9-849b-8f108e7949df" alt="QList Home Screen" width="280">
-  <img src="https://github.com/user-attachments/assets/5a371575-3aa8-4e9f-ad50-2b697b98c832" alt="QList Note Taking" width="265">
-  <img src="https://github.com/user-attachments/assets/5a371575-3aa8-4e9f-ad50-2b697b98c832" alt="QList Note Screen" width="265">
-</p>
+  <img src="https://github.com/user-attachments/assets/ee88bf72-8e0d-4645-b225-1e483d63c54f" alt="QList Home Screen" width="280">
+  <img src="https://github.com/user-attachments/assets/e0868228-ffad-49e2-b40c-769f84a3290b" alt="QList Note Taking" width="245">
+  <img src="https://github.com/user-attachments/assets/a58c83a3-3d2b-4d6c-9b43-d5fa36b86bf2" alt="QList Note Screen" width="245">
+
 
 <details>
 <summary>🔬 Technological Insights</summary>
